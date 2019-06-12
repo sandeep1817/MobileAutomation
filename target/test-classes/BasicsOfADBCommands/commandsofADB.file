@@ -1,0 +1,9 @@
+adb devices - to get the connected devices
+adb shell pm list packages - to get all the application packages
+adb shell "dumpsys window windows | grep -E 'mCurrentFocus'" - to get currently opened application package and activity
+adb shell pm list packages -f - to get all the applications packages with full path
+adb shell pm path "*******" - to get .apk path using package
+adb pull "***********" - to generate .apk file using the .apk path
+paste aapt.exe path in cmd (which will be located in **\Android\sdk\build-tools\28.0.3\aapt.exe) dump badging "*****" (paste generated
+.apk file path) to get launching activity.
+adb shell uiautomator dump - To start UI automator using cmd/adb.
