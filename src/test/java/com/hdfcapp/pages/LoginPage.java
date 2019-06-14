@@ -3,44 +3,54 @@ package com.hdfcapp.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class LoginPage {
 	
-	private AndroidDriver<AndroidElement> driver;
+	private AppiumDriver<MobileElement> driver;
     public LoginPage() {
     }
-    public LoginPage(AndroidDriver<AndroidElement> driver) {
+    public LoginPage(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='ALLOW']")
-	public AndroidElement allowBtn;
+	public MobileElement allowBtn;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='No']")
-	public AndroidElement noBtn;
+	public MobileElement noBtn;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.view.View[@text='Customer ID / User ID']")
-	public AndroidElement custIdBtn;
+	public MobileElement custIdBtn;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(id = "fldLoginUserId")
-	public AndroidElement custIDTxtBox;
+	public MobileElement custIDTxtBox;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
-	public AndroidElement continueBtn;
+	public MobileElement continueBtn;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(id = "upass")
-	public AndroidElement passwordTxtBox;
+	public MobileElement passwordTxtBox;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(id = "chkLogin")
-	public AndroidElement checkBox;
+	public MobileElement checkBox;
 	
+    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='Login']")
-	public AndroidElement loginBtn;
+	public MobileElement loginBtn;
 	
 	public void login(String user,String password){
 		allowBtn.click();
@@ -55,4 +65,4 @@ public class LoginPage {
 	public void verifyThatHomePageDisplayed() {
 		System.out.println("Inside then");
 	}
-}
+	}
