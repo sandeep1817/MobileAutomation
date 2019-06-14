@@ -6,4 +6,4 @@ Feature: To login into the HDFC application
 		Then home page of the application should display
 	Examples: 
 		|user|password|
-		|72578238|@sandeep1712|
+		|72578238||

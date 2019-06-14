@@ -43,7 +43,6 @@ public class HomePage {
 	@AndroidFindBy(xpath = "//android.view.View[@resource-id='wrapper']/android.view.View/android.view.View[3]")
 	public MobileElement balance;
 
-
 	public void verifyTheBalanace() {
 		accountSummary.click();
 		String balanceInAccount = balance.getText();

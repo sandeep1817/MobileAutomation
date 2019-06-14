@@ -7,4 +7,4 @@ Feature: Validate the balance in the account
 		Then validate the balance in the account
 	Examples:
 	|user|password|
-	|72578238|@sandeep1712|
+	|72578238||
