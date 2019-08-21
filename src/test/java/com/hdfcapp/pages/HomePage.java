@@ -41,6 +41,10 @@ public class HomePage {
 	@iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.view.View[@resource-id='wrapper']/android.view.View/android.view.View[3]")
 	public MobileElement balance;
+	
+	@iOSFindBy(xpath = "")
+	@AndroidFindBy(xpath = "//android.view.View[@resource-id='save']/following-sibling::android.view.View/android.widget.ListView/android.view.View[3]")
+	public MobileElement fundsTransfer;
 
 	public void verifyTheBalanace() {
 		accountSummary.click();

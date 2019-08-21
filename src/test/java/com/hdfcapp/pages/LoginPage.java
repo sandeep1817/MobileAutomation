@@ -1,7 +1,13 @@
 package com.hdfcapp.pages;
 
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -15,47 +21,64 @@ public class LoginPage {
 	
 	private AppiumDriver<MobileElement> driver;
     public LoginPage() {
+    	
     }
     public LoginPage(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-    @iOSFindBy(xpath = "")
+
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='ALLOW']")
 	public MobileElement allowBtn;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='No']")
 	public MobileElement noBtn;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.view.View[@text='Customer ID / User ID']")
 	public MobileElement custIdBtn;
 	
-    @iOSFindBy(xpath = "")
+	/*@AndroidFindBy(xpath = "//*[@bounds='[540,339][1047,459]']")
+	public MobileElement custIdBtn;
+	*/
 	@AndroidFindBy(id = "fldLoginUserId")
 	public MobileElement custIDTxtBox;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
 	public MobileElement continueBtn;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(id = "upass")
 	public MobileElement passwordTxtBox;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(id = "chkLogin")
 	public MobileElement checkBox;
 	
-    @iOSFindBy(xpath = "")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='Login']")
 	public MobileElement loginBtn;
 	
-	public void login(String user,String password){
+	
+	public void login(String user,String password) throws InterruptedException{
 		allowBtn.click();
 		noBtn.click();
-		custIdBtn.click();
+		Set<String> handles = driver.getContextHandles();
+		System.out.println("Numbere of contexts: "+handles.size());
+		for(String context:handles){
+			if(!(context.equalsIgnoreCase("NATIVE_APP"))){
+				driver.context(context);
+				break;
+			}
+			else{
+				System.out.println("Context is: "+context);
+			}
+		}
+		WebDriverWait wait = new WebDriverWait(driver, 7);
+		wait.until(ExpectedConditions.elementToBeClickable(custIdBtn));
+		if(custIdBtn.isEnabled()){
+			custIdBtn.click();
+		}
+		else{
+			driver.findElement(By.xpath("//android.view.View[@id='contentData']//android.widget.ListView/android.view.View[2]")).click();
+			System.out.println("Inside else");
+		}
 		custIDTxtBox.sendKeys(user);
 		continueBtn.click();
 		passwordTxtBox.sendKeys(password);

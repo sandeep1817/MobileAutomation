@@ -4,9 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import com.hdfcapp.pages.TinderLoginPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,9 +16,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.offset.PointOption;
 
 public class InstaMapper {
-	
+
 	public AppiumDriver driver;
-	
+
 	@Given("^instagram application is launched$")
 	public void launchInstagram() throws MalformedURLException{
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -40,16 +40,18 @@ public class InstaMapper {
 		System.out.println("Height of the screen is: "+size.height +" Width of the screen is: "+size.width);
 		int startx = (int) (size.width*0.20);
 		int endx = (int) (size.width*0.80);
+		System.out.println("Starrting point is: "+startx);
+		System.out.println("ending point is: "+endx);
 		int starty = (int) (size.height/2);
+		TinderLoginPage tlp = new TinderLoginPage(driver);
 		TouchAction act = new TouchAction(driver);
 		PointOption p = new PointOption();
-		Thread.sleep(5);
-		System.out.println("Value of X is: "+startx);
-		System.out.println("Value of X is: "+endx);
-		act.press(p.withCoordinates(startx, starty)).moveTo(p.withCoordinates(endx, starty)).release().perform();
-		Thread.sleep(5);
-		act.press(p.withCoordinates(startx, starty)).moveTo(p.withCoordinates(endx, starty)).release().perform();
+		for(int i=0;i<=20;i++){
+			tlp.waitTillElement();
+			driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+			act.press(p.withCoordinates(startx, starty)).moveTo(p.withCoordinates(endx, starty)).release().perform();
 		}
+	}
 	@Then("^verify that messages tab is opened$")
 	public void validateMessagesScreenDispalyed(){
 		System.out.println("Inside then");
